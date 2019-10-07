@@ -17,7 +17,6 @@ def get_data_array(data, a=0, b=240):
     data = data[int(a * PPD):int(b * PPD)]
     arr = np.array(data)
     return arr
-
 def printData(data):
     #print(data)
     dataFront = get_data_array(data.ranges, 100, 140)
@@ -26,25 +25,21 @@ def printData(data):
     distleft=dataLeft.mean()
     distright=dataRight.mean()
 
-    pturn=((distleft)/(distleft+distright))*2-1
+    distInFront = dataFront.mean()
 
-    distInFront=dataFront.mean()
+    pturn = (distleft - distright) / (distleft + distright) / distInFront * 9
+
     print(distInFront)
     go=True
 
-    #if(distInFront<2):
-    #    go=False
+    x=1
+    speed=distInFront
 
-    if(go):
-        x=1
-        speed=5
-        turn=pturn
-    else:
-        x=0
-        speed=0
+    if((distInFront>2 and distright>2) or (distInFront>2 and distleft>2)):#previously 3
         turn=0
-    #x= 1 if go else 0
-    #speed=5 if go else 0
+    else:
+        turn=pturn
+
     c.move(x,turn,speed)
 
 if __name__ == "__main__":
@@ -53,7 +48,6 @@ if __name__ == "__main__":
     #mpo=rospy.Subscriber('main', LaserScan,run , queue_size=2)
     #pub = rospy.Subscriber('odom', odom, nav.print_odata, queue_size=2)
     lidarsub = rospy.Subscriber('scan', LaserScan, printData, queue_size=2)
-
 lrender=0
 dt=0
 lastsave=rospy.get_time()
