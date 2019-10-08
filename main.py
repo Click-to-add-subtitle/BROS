@@ -74,3 +74,4 @@ while not rospy.is_shutdown():
         print ('img saved in ',(time.time()-st1),' sec')'''
 
     pass
+ 
