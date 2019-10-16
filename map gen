@@ -5,21 +5,46 @@ def genMap(x,y):
     
     for i in range(0,len(map)):
         for j in range(0,len(map[0])):
-            map[i][j] = 1
-            
-    j = 1
-    i = 0
-    direction = 1
-    pathFound = False
-    while not pathFound:
-        map[i][j] = 0
+            map[i][j] = "#"
+      
+    for f in range(0,10):
+      j = round(len(map)/2)
+      i = round(len(map[1])/2)
+      direction = 1
+      pathFound = False
+      firstPass = True
+      while not pathFound:
+        map[i][j] = " "
+        if ((i==0 or i==len(map)-1 or j==0 or j==len(map[0])-1) and not firstPass):
+          pathFound = True
+          break
+        firstPass = False
         if (direction == 1):
             i = i+1
-            if (random.randint(0,5)==1):
-                direction = randint(0,4)
-    
+            if (random.randint(0,3)==1):
+                direction = random.randint(1,4)
+        elif (direction == 2):
+            j = j+1
+            if (random.randint(0,3)==1):
+                direction = random.randint(1,4)
+        elif (direction == 3):
+            j = j-1
+            if (random.randint(0,3)==1):
+                direction = random.randint(1,4)
+        elif (direction == 4):
+            i = i-1
+            if (random.randint(0,3)==1):
+                direction = random.randint(1,4)
+  
     return map
 
-map = genMap(10,10)
-for i in range (0,len(map)):
-        print (map[i])
+def drawMap (map):
+  line = ""
+  for i in range(0,len(map)):
+    line = ""
+    for j in range(0,len(map[0])):
+      line += map[i][j] + " "
+    print(line)
+
+map = genMap(60,60)
+drawMap(map)
