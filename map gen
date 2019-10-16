@@ -1,21 +1,22 @@
 import random
 
 def genMap(x,y):
-    map = arr = [[0 for i in range(x)] for j in range(y)]
+    map = arr = [[0 for i in range(0,x)] for j in range(0,y)]
     
     for i in range(0,len(map)):
         for j in range(0,len(map[0])):
             map[i][j] = "#"
       
-    for f in range(0,10):
-      j = round(len(map)/2)
-      i = round(len(map[1])/2)
+    for f in range(0,15):
+      i = round(random.randint(0,len(map)-2))
+      j = round(random.randint(0,len(map[1])-2))
+      print (str(i)+"\t"+str(j))
       direction = 1
       pathFound = False
       firstPass = True
       while not pathFound:
         map[i][j] = " "
-        if ((i==0 or i==len(map)-1 or j==0 or j==len(map[0])-1) and not firstPass):
+        if ((i==0 or i>=len(map)-1 or j==0 or j>=len(map[1])-1) and not firstPass):
           pathFound = True
           break
         firstPass = False
@@ -46,5 +47,5 @@ def drawMap (map):
       line += map[i][j] + " "
     print(line)
 
-map = genMap(60,60)
+map = genMap(100,75)
 drawMap(map)
