@@ -1,13 +1,13 @@
 import random
 
-def genMap(x,y):
+def genMap(x,y,it,vel):
     map = arr = [[0 for i in range(0,x)] for j in range(0,y)]
     
     for i in range(0,len(map)):
         for j in range(0,len(map[0])):
             map[i][j] = 1
       
-    for f in range(0,15):
+    for f in range(0,it):
       i = round(random.randint(0,len(map)-2))
       j = round(random.randint(0,len(map[1])-2))
       print (str(i)+"\t"+str(j))
@@ -22,19 +22,19 @@ def genMap(x,y):
         firstPass = False
         if (direction == 1):
             i = i+1
-            if (random.randint(0,3)==1):
+            if (random.randint(0,vel)==0):
                 direction = random.randint(1,4)
         elif (direction == 2):
             j = j+1
-            if (random.randint(0,3)==1):
+            if (random.randint(0,vel)==0):
                 direction = random.randint(1,4)
         elif (direction == 3):
             j = j-1
-            if (random.randint(0,3)==1):
+            if (random.randint(0,vel)==0):
                 direction = random.randint(1,4)
         elif (direction == 4):
             i = i-1
-            if (random.randint(0,3)==1):
+            if (random.randint(0,vel)==0):
                 direction = random.randint(1,4)
 
     fmap = arr = [[0 for i in range(0,x)] for j in range(0,y)]
@@ -57,5 +57,5 @@ def drawMap (map):
         line += "##"
     print(line)
 
-map = genMap(100,75)
+map = genMap(100,75,3,3)
 drawMap(map)
