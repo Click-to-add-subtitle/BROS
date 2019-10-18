@@ -41,10 +41,10 @@ def genMap(x,y):
 
     for i in range(0,len(map)):
         for j in range(0,len(map[0])):
-            if (not (i==0 or i>=len(map)-1 or j==0 or j>=len(map[1])-1)):
-              #FINISH HERE TOMORROW
+          if ((not (i==0 or i>=len(map)-1 or j==0 or j>=len(map[1])-1) and (map[i+1][j]==0 or map[i-1][j]==0 or map[i][j+1]==0 or map[i][j-1]==0 or map[i+1][j+1]==0 or map[i-1][j-1]==0 or map[i+1][j-1]==0 or map[i-1][j+1]==0) and not map[i][j]==0)):
+            fmap[i][j] = 1
   
-    return map
+    return fmap
 
 def drawMap (map):
   line = ""
